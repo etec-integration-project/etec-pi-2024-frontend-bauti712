@@ -9,4 +9,6 @@ Bautista cola 6to informatica
 2) ahora colocamos el comando "cd etec-pi-2024-frontend-bauti712" esto lo hacemos para poder ingresar al programa
 
 3) ahora simplemente hacemos un ""docker compose up --build"
+
+4) ahora nos vamos al localhost 3000 en el navegador y listo 
 "
