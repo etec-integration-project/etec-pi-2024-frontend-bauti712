@@ -12,3 +12,5 @@ Bautista cola 6to informatica
 
 4) ahora nos vamos al localhost 3000 en el navegador y listo 
 "
+5) en este sprint coloque los botones necesarios para los linkeos con el back en el futuro
+ademas de agregar un cuestionario con autocompletado para consultas en el Ecomerce
