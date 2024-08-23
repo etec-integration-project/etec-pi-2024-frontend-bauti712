@@ -12,4 +12,4 @@ Bautista cola 6to informatica
 
 4) ahora nos vamos al localhost 3000 en el navegador y listo 
 "
-5) Una vez en la pagina principal del e comerce nos dirigiremos a la parte superior derecha y los botones "nosotros" y "contacto" estan linkeados a sus respectivas areas
+5) Una vez en la pagina principal del e comerce nos dirigiremos a la parte superior derecha y los botones estan linkeados a sus areas es decir que la pagina ya cuenta con una semi libre navegación 
