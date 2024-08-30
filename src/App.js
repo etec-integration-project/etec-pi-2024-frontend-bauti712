@@ -7,8 +7,9 @@ import wilson from "./imagenes/wilson.jpg";
 import yonex from "./imagenes/yonex.jpg";
 import carro from "./imagenes/carro.png";
 import user from "./imagenes/user.png";
-import Nosotros from './components/Nosotros'; // Importa el componente Nosotros
-import Contacto from './components/Contacto'; // Importa el componente Contacto
+import Nosotros from './components/Nosotros';
+import Contacto from './components/Contacto';
+import Usuario from './components/Usuario'; // Importa el componente Usuario
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           <nav>
             <ul>
               <li><Link to="/">Inicio</Link></li>
-              <li><Link to="/productos">Productos</Link></li>
+              <li><Link to="/Usuario">Usuario</Link></li>
               <li><Link to="/carrito">Carrito</Link></li>
               <li><Link to="/contacto">Contacto</Link></li>
               <li><Link to="/nosotros">Nosotros</Link></li>
@@ -70,12 +71,7 @@ function App() {
               </section>
             } />
             
-            <Route path="/productos" element={
-              <div>
-                <h2>Productos</h2>
-                <p>Aquí encontrarás todos nuestros productos disponibles.</p>
-              </div>
-            } />
+            <Route path="/Usuario" element={<Usuario />} /> {/* Ruta para el componente Usuario */}
 
             <Route path="/carrito" element={
               <div>
