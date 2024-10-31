@@ -10,7 +10,7 @@ function Usuario() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:3001/creacionUsuarios/registrar', { username, password });
+            const response = await axios.post('/app/creacionUsuarios/registrar', { username, password });
             setMensaje('Usuario registrado con éxito');
         } catch (error) {
             if (error.response && error.response.status === 409) {

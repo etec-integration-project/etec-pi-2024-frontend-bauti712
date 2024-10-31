@@ -13,7 +13,7 @@ export default function Body() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/products');
+        const response = await axios.get('/app/creacionUsuarios/products');
         setData(response.data);
       } catch (error) {
         console.error('Error interno del servidor:', error);
