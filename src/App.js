@@ -1,17 +1,38 @@
-// src/App.js
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import babolat from "./imagenes/babolat.jpg";
-import head from "./imagenes/head.jpg";
-import wilson from "./imagenes/wilson.jpg";
-import yonex from "./imagenes/yonex.jpg";
+import { useEffect, useState } from 'react';
 import carro from "./imagenes/carro.png";
 import user from "./imagenes/user.png";
 import Nosotros from './components/Nosotros';
 import Contacto from './components/Contacto';
-import Usuario from './components/Usuario'; // Importa el componente Usuario
+import Usuario from './components/Usuario';
+
+import babolat from "./imagenes/babolat.jpg";
+import head from "./imagenes/head.jpg";
+import wilson from "./imagenes/wilson.jpg";
+import yonex from "./imagenes/yonex.jpg";
 
 function App() {
+  const [productos, setProductos] = useState([]);
+
+  const imagenes = {
+    babolat,
+    head,
+    wilson,
+    yonex
+  };
+
+  useEffect(() => {
+    fetch("http://localhost:3001/app/productos")
+      .then((response) => response.json())
+      .then((data) => {
+        setProductos(data.productos);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los productos:", error);
+      });
+  }, []);
+
   return (
     <Router>
       <div className="App">
@@ -37,37 +58,15 @@ function App() {
             <Route path="/" element={
               <section className="productos">
                 <h2>Productos Destacados</h2>
-                <div className="producto producto-1">
-                  <img src={babolat} alt="Raqueta Babolat" />
-                  <h3>Raqueta de Tenis Babolat</h3>
-                  <p>Raqueta de alta gama para jugadores profesionales.</p>
-                  <p><strong>Precio:</strong> $250.00</p>
-                  <button>Agregar al Carrito</button>
-                </div>
-
-                <div className="producto producto-2">
-                  <img src={head} alt="Raqueta Head" />
-                  <h3>Raqueta de Tenis Head</h3>
-                  <p>Ideal para jugadores avanzados que buscan control y potencia.</p>
-                  <p><strong>Precio:</strong> $230.00</p>
-                  <button>Agregar al Carrito</button>
-                </div>
-
-                <div className="producto producto-3">
-                  <img src={wilson} alt="Raqueta Wilson" />
-                  <h3>Raqueta de Tenis Wilson</h3>
-                  <p>Equilibrio perfecto entre potencia y control para todo tipo de jugadores.</p>
-                  <p><strong>Precio:</strong> $210.00</p>
-                  <button>Agregar al Carrito</button>
-                </div>
-
-                <div className="producto producto-4">
-                  <img src={yonex} alt="Raqueta Yonex" />
-                  <h3>Raqueta de Tenis Yonex</h3>
-                  <p>Raqueta ligera y maniobrable, perfecta para jugadores técnicos.</p>
-                  <p><strong>Precio:</strong> $240.00</p>
-                  <button>Agregar al Carrito</button>
-                </div>
+                {productos.map((producto) => (
+                  <div key={producto.id} className={`producto producto-${`producto.id`}`}>
+                    <img src={imagenes[producto.imagen]} alt={producto.nombre} />
+                    <h3>{producto.nombre}</h3>
+                    <p>{producto.descripcion}</p>
+                    <p><strong>Precio:</strong> ${producto.precio.toFixed(2)}</p>
+                    <button>Agregar al Carrito</button>
+                  </div>
+                ))}
               </section>
             } />
             
