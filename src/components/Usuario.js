@@ -5,6 +5,9 @@ function Usuario() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [mensaje, setMensaje] = useState('');
+    const [mensajelogin, setmensajelogin] = useState('');
+    const [loginUser, setLoginUser] = useState('');
+    const [loginPassword, setLoginPassword] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,14 +23,14 @@ function Usuario() {
             }
         }
     };
-    const handleLogin = async (e) => {
+    const login = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('/app/creacionUsuarios/iniciar-sesion', { username, password });
-            setMensaje('Inicio con éxito');
+            const response = await axios.post('/app/creacionUsuarios/iniciar-sesion', { loginUser, loginPassword });
+            setmensajelogin('Inicio exitoso');
         } catch (error) {
-            
+            setmensajelogin('Inicio exitoso');
         }
     };
 
@@ -46,20 +49,21 @@ function Usuario() {
                 <button type="submit">Registrar</button>
             </form>
             {mensaje && <p>{mensaje}</p>}
-            
-            <h2>Inicio</h2>
-            <form onSubmit={handleLogin}>
+
+            <h2>Iniciar Usuario</h2>
+            <form onSubmit={login}>
                 <div>
                     <label>Username:</label>
-                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                    <input type="text" value={loginUser} onChange={(e) => setLoginUser(e.target.value)} required />
                 </div>
                 <div>
                     <label>Password:</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <input type="password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required />
                 </div>
-                <button type="submit">iniciar</button>
+                <button type="submit">Iniciar</button>
             </form>
-            {mensaje && <p>{mensaje}</p>}
+            {mensajelogin && <p>{mensajelogin}</p>}
+            
         </div>
     );
 }
