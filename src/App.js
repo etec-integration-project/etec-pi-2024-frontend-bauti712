@@ -11,6 +11,8 @@ import babolat from "./imagenes/babolat.jpg";
 import head from "./imagenes/head.jpg";
 import wilson from "./imagenes/wilson.jpg";
 import yonex from "./imagenes/yonex.jpg";
+import axios from 'axios';
+
 
 function App() {
   const [productos, setProductos] = useState([]);
@@ -22,15 +24,10 @@ function App() {
     yonex
   };
 
-  useEffect(() => {
-    fetch("http://localhost:3001/app/productos")
-      .then((response) => response.json())
-      .then((data) => {
-        setProductos(data.productos);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los productos:", error);
-      });
+  useEffect(async () => {
+    const response = await axios.get('/app/creacionUsuarios/productos')
+    const a = await response.json()
+    setProductos(a)
   }, []);
 
   return (

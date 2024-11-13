@@ -20,6 +20,16 @@ function Usuario() {
             }
         }
     };
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post('/app/creacionUsuarios/iniciar-sesion', { username, password });
+            setMensaje('Inicio con éxito');
+        } catch (error) {
+            
+        }
+    };
 
     return (
         <div>
@@ -34,6 +44,20 @@ function Usuario() {
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
                 <button type="submit">Registrar</button>
+            </form>
+            {mensaje && <p>{mensaje}</p>}
+            
+            <h2>Inicio</h2>
+            <form onSubmit={handleLogin}>
+                <div>
+                    <label>Username:</label>
+                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                </div>
+                <div>
+                    <label>Password:</label>
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                </div>
+                <button type="submit">iniciar</button>
             </form>
             {mensaje && <p>{mensaje}</p>}
         </div>
