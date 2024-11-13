@@ -26,7 +26,7 @@ function App() {
     fetch("/app/creacionUsuarios/productos")
       .then((response) => response.json())
       .then((data) => {
-        setProductos(data.productos);
+        setProductos(data.products);
       })
       .catch((error) => {
         console.error("Error al obtener los productos:", error);
@@ -58,7 +58,7 @@ function App() {
             <Route path="/" element={
               <section className="productos">
                 <h2>Productos Destacados</h2>
-                {productos.map((producto) => (
+                {(productos ?? []).map((producto) => (
                   <div key={producto.id} className={`producto producto-${`producto.id`}`}>
                     <img src={imagenes[producto.imagen]} alt={producto.nombre} />
                     <h3>{producto.nombre}</h3>
