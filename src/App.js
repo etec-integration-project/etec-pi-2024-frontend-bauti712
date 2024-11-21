@@ -12,8 +12,11 @@ import head from "./imagenes/head.jpg";
 import wilson from "./imagenes/wilson.jpg";
 import yonex from "./imagenes/yonex.jpg";
 
+import axios from 'axios';
+
 function App() {
   const [productos, setProductos] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
 
   const imagenes = {
     babolat,
@@ -32,6 +35,52 @@ function App() {
         console.error("Error al obtener los productos:", error);
       });
   }, []);
+
+  const addToCart = (product) => {
+    if (cartItems[product.id]) {
+        const updatedCart = { ...cartItems };
+        updatedCart[product.id].quantity += 1;
+        setCartItems(updatedCart);
+    } else {
+        setCartItems({
+        ...cartItems,
+        [product.id]: { ...product, quantity: 1 },
+        });
+    }
+  };
+
+  const removeFromCart = (productId) => {
+    const updatedCart = { ...cartItems };
+
+    if (updatedCart[productId]) {
+        if (updatedCart[productId].quantity > 1) {
+            updatedCart[productId].quantity -= 1;
+        } else {
+            delete updatedCart[productId];
+        }
+
+        setCartItems(updatedCart);
+    }
+  };
+
+  const filteredCart = Object.values(cartItems).map(({ id, quantity }) => ({ id, quantity }));
+
+  const jsonifiedCart = JSON.stringify(filteredCart);
+
+  const handleCart = async () => {
+    if (jsonifiedCart !== "[]") {
+      try {
+        await axios.post('/app/cart', {jsonifiedCart});
+        console.log("jsonifiedCart: ", jsonifiedCart);
+        alert('Articulos comprados con exito');
+      } catch (err) {
+        alert('Error al realizar la compra');
+        console.log("Error al registrar carrito: ", err)
+      }    
+    } else {
+      alert('Seleccionar articulos antes de realizar la compra');
+    }
+  };
 
   return (
     <Router>
@@ -64,7 +113,7 @@ function App() {
                     <h3>{producto.nombre}</h3>
                     <p>{producto.descripcion}</p>
                     <p><strong>Precio:</strong> ${producto.precio.toFixed(2)}</p>
-                    <button>Agregar al Carrito</button>
+                    <button onClick={() => addToCart(producto)}>Agregar al Carrito</button>
                   </div>
                 ))}
               </section>
@@ -75,7 +124,19 @@ function App() {
             <Route path="/carrito" element={
               <div>
                 <h2>Carrito</h2>
-                <p>Tu carrito de compras está vacío.</p>
+                {/* <p>Tu carrito de compras está vacío.</p> */}
+                <section className='productos'>
+                  {Object.values(cartItems).map((item) => (
+                    <div key={item.id} className={`producto producto-${`producto.id`}`}>
+                      <img src={imagenes[item.imagen]} alt={item.nombre} />
+                      <h3>{item.quantity}x {item.nombre}</h3>
+                      <p>{item.descripcion}</p>
+                      <p><strong>Precio:</strong> - {Number((item.precio * item.quantity)).toFixed(2)}</p>
+                      <button onClick={() => removeFromCart(item.id)}>Quitar del Carrito</button>
+                    </div>
+                  ))}
+                </section>
+                <button onClick={handleCart} className='buy'>Comprar</button>
               </div>
             } />
 

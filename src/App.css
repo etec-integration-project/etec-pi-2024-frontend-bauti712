@@ -56,6 +56,7 @@ main {
 }
 
 .producto {
+  max-width: 200px;
   border: 1px solid #ffcc80; /* Borde con tono suave de naranja */
   padding: 10px;
   background-color: #fff3e0; /* Fondo claro para los productos */
@@ -81,6 +82,15 @@ main {
 
 .producto button {
   background-color: #ff6f00; /* Botón naranja intenso */
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buy {
+  background-color: #ff6f00;
   color: #fff;
   border: none;
   padding: 10px;
