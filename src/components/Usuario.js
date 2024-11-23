@@ -27,8 +27,14 @@ function Usuario() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('/app/creacionUsuarios/iniciar-sesion', { loginUser, loginPassword });
-            setmensajelogin('Inicio exitoso');
+            const response = await axios.post('/app/creacionUsuarios/iniciar-sesion', { username: loginUser, password: loginPassword });
+            const statusCode = response.status;
+
+    if (statusCode === 200) { 
+        setmensajelogin('Inicio exitoso');
+    } else {
+        setmensajelogin(`el inicio fallo`);
+    }
         } catch (error) {
             setmensajelogin('Inicio exitoso');
         }
