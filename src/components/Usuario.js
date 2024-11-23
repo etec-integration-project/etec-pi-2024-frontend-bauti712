@@ -44,7 +44,7 @@ function Usuario() {
     };
 
     const productCreated =async (e) => {
-        await axios.post("/app/creacionUsuarios/crearProducto", {productName, price})
+        await axios.post("/app/creacionUsuarios/crearProducto", {productName, price, productUrl})
     }
 
     return (
