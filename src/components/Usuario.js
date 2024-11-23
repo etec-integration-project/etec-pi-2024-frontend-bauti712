@@ -35,7 +35,7 @@ function Usuario() {
         setmensajelogin(`el inicio fallo`);
     }
         } catch (error) {
-            setmensajelogin('Inicio exitoso');
+            setmensajelogin('credenciales invalidas');
         }
     };
 
