@@ -29,7 +29,7 @@ function Usuario() {
         try {
             const response = await axios.post('/app/creacionUsuarios/iniciar-sesion', { username: loginUser, password: loginPassword });
             console.log({loginResponse: response})
-    if (statusCode == 200) { 
+    if (response.status == 200) { 
         setmensajelogin('Inicio exitoso');
     } else {
         setmensajelogin(`el inicio fallo`);
