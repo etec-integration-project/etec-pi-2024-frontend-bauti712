@@ -8,6 +8,10 @@ function Usuario() {
     const [mensajelogin, setmensajelogin] = useState('');
     const [loginUser, setLoginUser] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
+    const [productName, setProductName] = useState('');
+    const [price, setPrice] = useState('');
+    const [productUrl, setProductUrl] = useState('');
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -39,6 +43,10 @@ function Usuario() {
         }
     };
 
+    const productCreated =async (e) => {
+        await axios.post("/app/creacionUsuarios/crearProducto", {productName, price})
+    }
+
     return (
         <div>
             <h2>Registrar Usuario</h2>
@@ -68,6 +76,27 @@ function Usuario() {
                 <button type="submit">Iniciar</button>
             </form>
             {mensajelogin && <p>{mensajelogin}</p>}
+
+
+            <h2>Crear nuevo producto</h2>
+            <form onSubmit={productCreated}>
+                <div>
+                    <label>Nombre del producto:</label>
+                    <input type="text" value={productName} onChange={(e) => setProductName(e.target.value)} required />
+                </div>
+
+                <div>
+                    <label>precio del producto:</label>
+                    <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} required />
+                </div>
+
+                <div>
+                    <label>URL imagen:</label>
+                    <input type="text" value={productUrl} onChange={(e) => setProductUrl(e.target.value)} required />
+                </div>
+
+                <button type="submit">Crear producto</button>
+            </form>
             
         </div>
     );
