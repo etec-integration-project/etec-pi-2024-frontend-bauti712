@@ -11,7 +11,8 @@ function Usuario() {
     const [productName, setProductName] = useState('');
     const [price, setPrice] = useState('');
     const [productUrl, setProductUrl] = useState('');
-
+    const [descripcion, setDescripcion] = useState('');
+    const [calificacion, setCalificacion] = useState(0);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,19 +34,46 @@ function Usuario() {
         try {
             const response = await axios.post('/app/creacionUsuarios/iniciar-sesion', { username: loginUser, password: loginPassword });
             console.log({loginResponse: response})
-    if (response.data == "Inicio de sesión exitoso" || response.status != 401 || response.statusCode != 401 ) { 
-        setmensajelogin('Inicio exitoso');
-    } else {
-        setmensajelogin(`el inicio fallo`);
-    }
+            if (response.data == "Inicio de sesión exitoso" || response.status != 401 || response.statusCode != 401 ) { 
+                setmensajelogin('Inicio exitoso');
+            } else {
+                setmensajelogin(`el inicio fallo`);
+            }
         } catch (error) {
             setmensajelogin('credenciales invalidas');
         }
     };
 
     const productCreated =async (e) => {
-        await axios.post("/app/productos", {productName, price, productUrl})
+        e.preventDefault();
+
+        try {
+            const response = await axios.post('/app/productos', {
+                nombre: productName,
+                price: price,
+                descripcion: descripcion,
+                imagen: productUrl
+            });
+            location.reload();
+        } catch (error) {
+            console.log(error)
+        }
     }
+
+    const calificar = async (e) => {
+        e.preventDefault();
+
+        if (calificacion >= 1 && calificacion <= 5) {
+            try {
+              const respuesta = await axios.post("/app/calificaciones", { calificacion: calificacion });
+              alert(respuesta.data.mensaje);
+            } catch (error) {
+              alert(error);
+            }
+        } else {
+            alert("Calificación inváida. Por favor ingrese un número del 1 al 5.");
+        }
+    };
 
     return (
         <div>
@@ -91,11 +119,25 @@ function Usuario() {
                 </div>
 
                 <div>
+                    <label>descripcion del producto:</label>
+                    <input type="textarea" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} required />
+                </div>
+
+                <div>
                     <label>URL imagen:</label>
                     <input type="text" value={productUrl} onChange={(e) => setProductUrl(e.target.value)} required />
                 </div>
 
                 <button type="submit">Crear producto</button>
+            </form>
+
+            <h2>Calificanos</h2>
+            <form onSubmit={calificar}>
+                <div>
+                    <label>Calificacion del 1 al 5:</label>
+                    <input type="number" value={calificacion} onChange={(e) => setCalificacion(e.target.value)} required />
+                </div>
+                <button type="submit">Calificar</button>
             </form>
             
         </div>

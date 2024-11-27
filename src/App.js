@@ -17,6 +17,7 @@ import axios from 'axios';
 function App() {
   const [productos, setProductos] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [calificacion, setCalificacion] = useState(0);
 
   const imagenes = {
     babolat,
@@ -26,14 +27,28 @@ function App() {
   };
 
   useEffect(() => {
-    fetch("/app/creacionUsuarios/productos")
+    fetch("/app/productos")
       .then((response) => response.json())
       .then((data) => {
-        setProductos(data.products);
+        setProductos(data);
       })
       .catch((error) => {
         console.error("Error al obtener los productos:", error);
       });
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const respuesta = await axios.get("/app/calificaciones");
+        if (respuesta.data.calificacion !== null) {
+          setCalificacion(respuesta.data.calificacion);
+        }
+      } catch (error) {
+        console.log("Error");
+      }
+    };
+    fetchData();
   }, []);
 
   const addToCart = (product) => {
@@ -86,7 +101,7 @@ function App() {
     <Router>
       <div className="App">
         <header>
-          <h1>RacketZone</h1>
+          <h1>{calificacion}⭐ RacketZone</h1>
           <nav>
             <ul>
               <li><Link to="/">Inicio</Link></li>
@@ -112,7 +127,7 @@ function App() {
                     <img src={imagenes[producto.imagen]} alt={producto.nombre} />
                     <h3>{producto.nombre}</h3>
                     <p>{producto.descripcion}</p>
-                    <p><strong>Precio:</strong> ${producto.precio.toFixed(2)}</p>
+                    <p><strong>Precio:</strong> ${producto.price.toFixed(2)}</p>
                     <button onClick={() => addToCart(producto)}>Agregar al Carrito</button>
                   </div>
                 ))}
@@ -131,7 +146,7 @@ function App() {
                       <img src={imagenes[item.imagen]} alt={item.nombre} />
                       <h3>{item.quantity}x {item.nombre}</h3>
                       <p>{item.descripcion}</p>
-                      <p><strong>Precio:</strong> - {Number((item.precio * item.quantity)).toFixed(2)}</p>
+                      <p><strong>Precio:</strong> - {Number((item.price * item.quantity)).toFixed(2)}</p>
                       <button onClick={() => removeFromCart(item.id)}>Quitar del Carrito</button>
                     </div>
                   ))}
