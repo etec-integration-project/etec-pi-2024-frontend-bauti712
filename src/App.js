@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import carro from "./imagenes/carro.png";
 import user from "./imagenes/user.png";
 import Nosotros from './components/Nosotros';
-import Contacto from './components/Contacto';
 import Usuario from './components/Usuario';
 
 import babolat from "./imagenes/babolat.jpg";
@@ -28,7 +27,6 @@ async function verificarSesion() {
       return null;
   }
 }
-
 
 function App() {
   const [productos, setProductos] = useState([]);
@@ -149,7 +147,6 @@ function App() {
               <li><Link to="/">Inicio</Link></li>
               <li><Link to="/Usuario">Usuario</Link></li>
               <li><Link to="/carrito">Carrito</Link></li>
-              <li><Link to="/contacto">Contacto</Link></li>
               <li><Link to="/nosotros">Nosotros</Link></li>
             </ul>
             <div className="iconos">
@@ -181,7 +178,6 @@ function App() {
             <Route path="/carrito" element={
               <div>
                 <h2>Carrito</h2>
-                {/* <p>Tu carrito de compras está vacío.</p> */}
                 <section className='productos'>
                   {Object.values(cartItems).map((item) => (
                     <div key={item.id} className={`producto producto-${`producto.id`}`}>
@@ -214,8 +210,6 @@ function App() {
                 )}
               </div>
             } />
-
-            <Route path="/contacto" element={<Contacto />} />
 
             <Route path="/nosotros" element={<Nosotros />} />
           </Routes>
