@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import './Nosotros.css';
 
 function Nosotros() {
   const [calificaciones, setCalificaciones] = useState([]);

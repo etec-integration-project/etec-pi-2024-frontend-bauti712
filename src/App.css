@@ -96,8 +96,8 @@ footer {
 
 .producto img {
   width: 100%;
-  height: 250px; /* Asegurar que la imagen ocupe un tamaño adecuado */
-  object-fit: cover;
+  height: 300px; /* Ajustamos la altura para que la imagen sea más grande */
+  object-fit: contain; /* La imagen se ajustará dentro del contenedor sin recortarse */
   border-radius: 6px;
 }
 
@@ -252,8 +252,8 @@ h2 {
 
 .producto img {
   border-radius: 6px;
-  object-fit: cover;
-  height: 200px;
+  object-fit: contain;
+  height: 300px;
 }
 
 /* Layout para la vista del carrito */
@@ -278,8 +278,8 @@ h2 {
 
 .producto-cart img {
   max-width: 100%;
-  height: 180px;
-  object-fit: cover;
+  height: 250px; /* Ajustamos la altura para que la imagen sea más grande */
+  object-fit: contain; /* La imagen se ajustará dentro del contenedor sin recortarse */
   border-radius: 6px;
 }
 
