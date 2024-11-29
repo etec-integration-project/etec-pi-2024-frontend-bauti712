@@ -14,10 +14,28 @@ import yonex from "./imagenes/yonex.jpg";
 
 import axios from 'axios';
 
+async function verificarSesion() {
+  try {
+      const response = await fetch('/app/creacionUsuarios/verificar-sesion', {
+          method: 'GET',
+          credentials: 'include',
+      });
+
+      const data = await response.json();
+      return data.loggedIn ? data.user : null;
+  } catch (error) {
+      console.error('Error al verificar al usuario:', error);
+      return null;
+  }
+}
+
+
 function App() {
   const [productos, setProductos] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [calificacion, setCalificacion] = useState(0);
+  const [sesion, setSesion] = useState(null);
+  const [carts, setCarts] = useState([]);
 
   const imagenes = {
     babolat,
@@ -48,8 +66,32 @@ function App() {
         console.log("Error");
       }
     };
+
     fetchData();
+
+    const fetchUser = async () => {
+      const loggedInUser = await verificarSesion();
+      setSesion(loggedInUser);
+    }
+
+    fetchUser();
+
+    const fetchCarts = async () => {
+      try {
+        const respuesta = await axios.get('/app/user_carts', { withCredentials: true });
+        console.log("RESPONSE CART =>", respuesta.data.cart);
+        setCarts(respuesta.data.cart);  
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchCarts();
   }, []);
+
+  useEffect(() => {
+    console.log("UPDATED STATE CART =>", carts);
+  }, [carts]);
 
   const addToCart = (product) => {
     if (cartItems[product.id]) {
@@ -78,7 +120,7 @@ function App() {
     }
   };
 
-  const filteredCart = Object.values(cartItems).map(({ id, quantity }) => ({ id, quantity }));
+  const filteredCart = Object.values(cartItems).map(({ id, nombre, price, quantity }) => ({ id, nombre, price, quantity }));
 
   const jsonifiedCart = JSON.stringify(filteredCart);
 
@@ -152,6 +194,24 @@ function App() {
                   ))}
                 </section>
                 <button onClick={handleCart} className='buy'>Comprar</button>
+                {sesion && (
+                  <section>
+                    {carts?.map((cart, index) => (
+                      <>
+                        <h2>Compra numero: <strong>{index + 1}</strong></h2>
+                        <hr/>
+                        <div className='productos-cart' key={index}>
+                          {cart.cart.map((item) => (
+                            <div className='producto' key={item.id}>
+                              <h3>{item.quantity}x {item.nombre}</h3>
+                              <p><strong>Precio:</strong> - {Number((item.price * item.quantity)).toFixed(2)}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </>
+                    ))}
+                  </section>
+                )}
               </div>
             } />
 
