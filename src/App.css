@@ -1,23 +1,27 @@
 /* App.css */
 .App {
-  font-family: Arial, sans-serif;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #fff7e6; /* Fondo suave con tono claro de naranja */
+  background-color: #fafafa; /* Fondo neutro y suave */
+  color: #333; /* Texto oscuro para mejor contraste */
 }
 
 header {
-  background-color: #ff6f00; /* Naranja intenso para la cabecera */
+  background-color: #ff6f00; /* Naranja intenso */
   color: #fff;
-  padding: 20px;
+  padding: 16px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para darle elegancia */
 }
 
 header h1 {
+  font-size: 1.5rem;
   margin: 0;
+  font-weight: 500;
 }
 
 nav ul {
@@ -28,149 +32,164 @@ nav ul {
 
 nav ul li {
   display: inline;
-  margin-right: 20px;
+  margin-right: 24px;
 }
 
 nav ul li a {
   color: #fff;
   text-decoration: none;
+  font-weight: 400;
 }
 
 nav ul li a:hover {
-  text-decoration: underline; /* Subrayado al pasar el ratón */
+  text-decoration: underline;
+  opacity: 0.8; /* Suavizar el efecto de hover */
 }
 
 .iconos img {
-  width: 30px; /* Ajustar tamaño de las imágenes */
-  margin-left: 10px; /* Añadir un poco de espacio entre las imágenes */
+  width: 24px;
+  margin-left: 12px; /* Menor espacio entre íconos */
 }
 
 main {
-  padding: 20px;
+  padding: 40px 16px;
 }
 
 .productos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
 }
 
 .productos-cart {
   display: flex;
-  padding: 20px;
-  gap: 8em;
+  padding: 24px 0;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .producto {
-  max-width: 200px;
-  border: 1px solid #ffcc80; /* Borde con tono suave de naranja */
-  padding: 10px;
-  background-color: #fff3e0; /* Fondo claro para los productos */
-  transition: transform 0.3s ease;
+  max-width: 240px;
+  border: 1px solid #ffcc80;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .producto:hover {
-  transform: scale(1.05); /* Efecto de aumento al pasar el ratón */
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Efecto elevación más marcado */
 }
 
 .producto img {
   width: 100%;
+  border-radius: 6px;
 }
 
 .producto h3 {
-  margin: 10px 0;
-  color: #e65100; /* Título con naranja más oscuro */
+  margin: 16px 0;
+  font-size: 1.1rem;
+  color: #e65100;
 }
 
 .producto p {
-  color: #5d4037; /* Texto descriptivo en marrón suave */
+  color: #5d4037;
+  font-size: 0.9rem;
 }
 
 .producto button {
-  background-color: #ff6f00; /* Botón naranja intenso */
-  color: #fff;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.buy {
   background-color: #ff6f00;
   color: #fff;
   border: none;
-  padding: 10px;
+  padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border-radius: 4px;
 }
 
 .producto button:hover {
-  background-color: #e65100; /* Botón cambia a naranja más oscuro al pasar el ratón */
+  background-color: #e65100;
+  transform: scale(1.05); /* Efecto de aumento al pasar el ratón */
 }
 
-.about {
-  background-color: #ffe0b2; /* Fondo de la sección "Sobre Nosotros" */
-  padding: 20px;
-  margin-top: 20px;
+.about, .contacto {
+  background-color: #fff;
+  padding: 40px 16px;
+  margin-top: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.about h2 {
+.about h2, .contacto h2 {
   color: #e65100;
+  font-size: 1.3rem;
+  font-weight: 600;
 }
 
-.about p {
+.about p, .contacto p {
   color: #5d4037;
-}
-
-.contacto {
-  background-color: #ffe0b2; /* Fondo de la sección de contacto */
-  padding: 20px;
-  margin-top: 20px;
-}
-
-.contacto h2 {
-  color: #e65100;
+  line-height: 1.6;
 }
 
 .contacto form div {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .contacto label {
   display: block;
   color: #5d4037;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  font-weight: 500;
 }
 
 .contacto input[type="text"],
 .contacto input[type="email"],
 .contacto textarea {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ffcc80; /* Borde suave en naranja */
-  border-radius: 5px;
-  background-color: #fff3e0;
+  padding: 12px;
+  border: 1px solid #ffcc80;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 0.95rem;
+  color: #333;
+  transition: border 0.3s ease;
+}
+
+.contacto input[type="text"]:focus,
+.contacto input[type="email"]:focus,
+.contacto textarea:focus {
+  border-color: #ff6f00;
 }
 
 .contacto button {
-  background-color: #ff6f00; /* Botón naranja intenso */
+  background-color: #ff6f00;
   color: #fff;
   border: none;
-  padding: 10px;
+  padding: 12px 24px;
   cursor: pointer;
+  font-size: 1rem;
   transition: background-color 0.3s ease;
+  border-radius: 4px;
 }
 
 .contacto button:hover {
-  background-color: #e65100; /* Botón cambia a naranja más oscuro al pasar el ratón */
+  background-color: #e65100;
 }
 
 footer {
-  background-color: #ff6f00; /* Naranja intenso para el pie de página */
+  background-color: #ff6f00;
   color: #fff;
-  padding: 10px;
+  padding: 12px;
   position: fixed;
   bottom: 0;
   width: 100%;
-  text-align: center; /* Centrar el texto del pie de página */
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 400;
 }

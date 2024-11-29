@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import './Usuario.css';  // Asegúrate de que este archivo esté en la misma carpeta
 
 function Usuario() {
     const [username, setUsername] = useState('');
@@ -28,23 +29,23 @@ function Usuario() {
             }
         }
     };
+
     const login = async (e) => {
         e.preventDefault();
 
         try {
             const response = await axios.post('/app/creacionUsuarios/iniciar-sesion', { username: loginUser, password: loginPassword });
-            console.log({loginResponse: response})
-            if (response.data == "Inicio de sesión exitoso" || response.status != 401 || response.statusCode != 401 ) { 
+            if (response.data === "Inicio de sesión exitoso" || response.status !== 401) {
                 setmensajelogin('Inicio exitoso');
             } else {
-                setmensajelogin(`el inicio fallo`);
+                setmensajelogin('El inicio falló');
             }
         } catch (error) {
-            setmensajelogin('credenciales invalidas');
+            setmensajelogin('Credenciales inválidas');
         }
     };
 
-    const productCreated =async (e) => {
+    const productCreated = async (e) => {
         e.preventDefault();
 
         try {
@@ -56,90 +57,88 @@ function Usuario() {
             });
             location.reload();
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    }
+    };
 
     const calificar = async (e) => {
         e.preventDefault();
 
         if (calificacion >= 1 && calificacion <= 5) {
             try {
-              const respuesta = await axios.post("/app/calificaciones", { calificacion: calificacion });
-              alert(respuesta.data.mensaje);
+                const respuesta = await axios.post("/app/calificaciones", { calificacion: calificacion });
+                alert(respuesta.data.mensaje);
             } catch (error) {
-              alert(error);
+                alert(error);
             }
         } else {
-            alert("Calificación inváida. Por favor ingrese un número del 1 al 5.");
+            alert("Calificación inválida. Por favor ingrese un número del 1 al 5.");
         }
     };
 
     return (
-        <div>
+        <div className="usuario-container">
             <h2>Registrar Usuario</h2>
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="input-container">
                     <label>Username:</label>
                     <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
                 </div>
-                <div>
+                <div className="input-container">
                     <label>Password:</label>
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
-                <button type="submit">Registrar</button>
+                <button type="submit" className="btn">Registrar</button>
             </form>
             {mensaje && <p>{mensaje}</p>}
 
             <h2>Iniciar Usuario</h2>
             <form onSubmit={login}>
-                <div>
+                <div className="input-container">
                     <label>Username:</label>
                     <input type="text" value={loginUser} onChange={(e) => setLoginUser(e.target.value)} required />
                 </div>
-                <div>
+                <div className="input-container">
                     <label>Password:</label>
                     <input type="password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required />
                 </div>
-                <button type="submit">Iniciar</button>
+                <button type="submit" className="btn">Iniciar</button>
             </form>
             {mensajelogin && <p>{mensajelogin}</p>}
 
-
             <h2>Crear nuevo producto</h2>
             <form onSubmit={productCreated}>
-                <div>
+                <div className="input-container">
                     <label>Nombre del producto:</label>
                     <input type="text" value={productName} onChange={(e) => setProductName(e.target.value)} required />
                 </div>
 
-                <div>
-                    <label>precio del producto:</label>
+                <div className="input-container">
+                    <label>Precio del producto:</label>
                     <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} required />
                 </div>
 
-                <div>
-                    <label>descripcion del producto:</label>
-                    <input type="textarea" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} required />
+                <div className="input-container">
+                    <label>Descripción del producto:</label>
+                    <textarea value={descripcion} onChange={(e) => setDescripcion(e.target.value)} required />
                 </div>
 
-                <div>
+                <div className="input-container">
                     <label>URL imagen:</label>
                     <input type="text" value={productUrl} onChange={(e) => setProductUrl(e.target.value)} required />
                 </div>
 
-                <button type="submit">Crear producto</button>
+                <button type="submit" className="btn">Crear producto</button>
             </form>
 
             <h2>Calificanos</h2>
             <form onSubmit={calificar}>
-                <div>
-                    <label>Calificacion del 1 al 5:</label>
+                <div className="input-container">
+                    <label>Calificación del 1 al 5:</label>
                     <input type="number" value={calificacion} onChange={(e) => setCalificacion(e.target.value)} required />
                 </div>
-                <button type="submit">Calificar</button>
+                <button type="submit" className="btn">Calificar</button>
             </form>
-            
         </div>
     );
 }
