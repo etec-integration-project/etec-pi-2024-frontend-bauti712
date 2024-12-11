@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: bautistadb
+    restart: always
+    networks:
+      - bauti-app-network
+
+  app:
+    build:
+      context: https://github.com/etec-integration-project/etec-pi-2024-backend-bauti712.git
+      dockerfile: dockerfile
+    depends_on:
+      - mysqldb
+    environment:
+      - PASSWORD=123456
+      - DBNAME=bautistadb
+      - HOST=mysqldb
+    restart: always
+    networks:
+      - bauti-app-network
+
+  frontend:
+    build:
+      context: https://github.com/etec-integration-project/etec-pi-2024-frontend-bauti712.git
+      dockerfile: Dockerfile
+    networks:
+      - bauti-app-network
+
+  proxy:
+    build: https://raw.githubusercontent.com/etec-integration-project/etec-pi-2024-backend-bauti712/main/proxy/Dockerfile
+    ports:
+      - "80:80"  
+    depends_on:
+      - frontend
+      - app
+    networks:
+      - bauti-app-network
+
+networks:
+  bauti-app-network:
+    driver: bridge

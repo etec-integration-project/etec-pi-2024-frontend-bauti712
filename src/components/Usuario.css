@@ -1,0 +1,100 @@
+/* Usuario.css */
+
+/* Contenedor principal del componente */
+.usuario-container {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilo para los títulos de los formularios */
+  h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Contenedor para cada campo de formulario */
+  .input-container {
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo para las etiquetas de los campos de entrada */
+  label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  /* Estilo para los campos de entrada (input y textarea) */
+  input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  /* Estilo específico para el textarea */
+  textarea {
+    height: 120px;
+  }
+  
+  /* Estilo para los botones */
+  button.btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  /* Estilo para cuando el usuario pasa el mouse sobre los botones */
+  button.btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Mensajes de éxito o error debajo de cada formulario */
+  p {
+    text-align: center;
+    color: #ff6f00;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  /* Ajustes para el formulario de calificación */
+  form input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  /* Añadir un poco de separación entre formularios */
+  form {
+    margin-bottom: 40px;
+  }
+  
+  /* Estilos para los mensajes de alerta */
+  .mensaje {
+    text-align: center;
+    font-size: 18px;
+    color: #FF6347;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
